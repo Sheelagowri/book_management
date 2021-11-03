@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @book.content %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @book.category.name %>
+</p>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag(@book.image, style: 'max-height:200px;width:auto;') if @book.image.persisted? %>
+</p>
+
+<%= link_to 'Back', root_path %>
