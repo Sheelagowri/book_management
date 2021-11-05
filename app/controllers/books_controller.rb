@@ -1,8 +1,8 @@
 class BooksController < ApplicationController
 
+  
   helper_method :sort_column, :sort_direction
   def index
-    @books = Book.order(sort_column + " " + sort_direction)
     params[:category_id] && @books = @books.where(category_id: params[:category_id])
     if params[:book_id]
       @books = @books.search(params[:book_id].downcase)
@@ -10,6 +10,16 @@ class BooksController < ApplicationController
       @books = Book.order(sort_column + " " + sort_direction)
     end
 
+    case (params.has_key?(:price_range))
+    when (params[:price_range] == "0..100")
+      @books= Book.where(price: 0..100)
+    when (params[:price_range] == "100..200")
+      @books= Book.where(price: 100..200)
+    when (params[:price_range] == "300..500")
+      @books= Book.where(price: 300..500)
+    when (params[:price_range] == "above 500")
+      @books= Book.where(price: 500..)
+    end
 
   end
 
