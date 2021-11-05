@@ -12,13 +12,13 @@ class BooksController < ApplicationController
 
     case (params.has_key?(:price_range))
     when (params[:price_range] == "0..100")
-      @books= Book.where('price < 100')
+      @books= Book.where('price <= 100')
     when (params[:price_range] == "100..200")
       @books= Book.where('price < 200 and price>100')
     when (params[:price_range] == "300..500")
       @books= Book.where('price > 300 and price<500')
     when (params[:price_range] == "above 500")
-      @books= Book.where('price > 500')
+      @books= Book.where('price >= 500')
     end
 
   end
