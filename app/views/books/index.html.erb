@@ -1,15 +1,11 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Books</h1>
-<%= form_with url: "/", method: :get do |form| %>
+<%= form_with url: root_path(params.as_json), method: :get do |form| %>
   <%= form.label  "Search by Category:" %>
-  <%= form.collection_select :category_id, Category.all,:id,:name, include_blank: false %>
-  <%= form.submit "Search" %>
-<% end %>
+  <%= form.collection_select :category_id, Category.all,:id,:name, include_blank: false, selected: params[:category_id] %>
 
-<%= form_with url: "/", method: :get do |form| %>
   <%= form.label "Search for books" %>
-  <%= form.text_field :title %>
+  <%= form.text_field :title, value: params[:title] %>
   <%= form.submit "Search" %>
 <% end %>
 
